@@ -15,9 +15,9 @@ const id = document.getElementById('app').getAttribute('data-id');
 
 // デモに使用する画像URL
 const assetUrls = [
-  '/image/image.jpg',
-  '/image/lady.jpg',
-  `/image/disp${id}.jpg`
+  '../image/image.jpg',
+  '../image/lady.jpg',
+  `../image/disp${id}.jpg`
 ];
 
 let canvas = renderer.domElement;
@@ -47,7 +47,7 @@ assetUrls.forEach((url, index) => {
   texture.flipY = false;
   textureArr.push(texture);
 
-  img.onload = function (_index, _img) {
+  img.onload = function(_index, _img) {
     let texture = textureArr[_index];
     texture.image = _img;
     texture.needsUpdate = true;
@@ -79,11 +79,11 @@ scene.add(mesh);
 
 resize();
 
-function start () {
+function start() {
   loop();
 }
 
-function loop () {
+function loop() {
   mat.uniforms.uTrans.value = obj.trans;
   mat.uniforms.uResolution.value = new THREE.Vector2(
     window.innerWidth,
@@ -94,22 +94,22 @@ function loop () {
   requestAnimationFrame(loop);
 }
 
-function resize () {
+function resize() {
   let size = Math.min(window.innerWidth, window.innerHeight) * 0.8;
   if (size > 450) size = 450;
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', function() {
   resize();
 });
 
-canvas.addEventListener('mouseenter', function () {
+canvas.addEventListener('mouseenter', function() {
   TweenMax.killTweensOf(obj);
   TweenMax.to(obj, 1.5, { trans: 1 });
 });
 
-canvas.addEventListener('mouseleave', function () {
+canvas.addEventListener('mouseleave', function() {
   TweenMax.killTweensOf(obj);
   TweenMax.to(obj, 1, { trans: 0 });
 });
