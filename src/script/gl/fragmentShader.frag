@@ -56,8 +56,5 @@ void main(){
   vec4 _texture2=texture2D(uTexture1,vec2(.5,.5)+(uv-vec2(.5))*scale(vec2(1.-sin((1.-trans)*.5))));
   
   gl_FragColor=mix(_texture1,_texture2,quarticInOut(uTrans));
-  
-  // gl_FragColor=vec4(vec3((disp-l)),1);
-  // gl_FragColor=vec4(mod(p,),1.,1);
 }
 

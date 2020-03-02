@@ -15,9 +15,9 @@ const id = document.getElementById('app').getAttribute('data-id');
 
 // デモに使用する画像URL
 const assetUrls = [
-  '/image/image.jpg',
-  '/image/lady.jpg',
-  `/image/disp${id}.jpg`
+  '../image/image.jpg',
+  '../image/lady.jpg',
+  `../image/disp${id}.jpg`
 ];
 
 let canvas = renderer.domElement;
@@ -88,8 +88,6 @@ function start () {
 
 function loop () {
   timer = timer + 0.01;
-
-  console.log(Math.sin(timer));
 
   mat.uniforms.uTrans.value = obj.trans;
   mat.uniforms.uTime.value = timer;
