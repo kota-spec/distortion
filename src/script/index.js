@@ -30,6 +30,8 @@ renderer.setSize(width, height);
 
 let scene = new THREE.Scene();
 
+let timer = 0;
+
 let obj = { trans: 0 };
 var cnt = 0;
 
@@ -62,6 +64,7 @@ assetUrls.forEach((url, index) => {
 
 let mat = new THREE.ShaderMaterial({
   uniforms: {
+    uTime: { value: timer },
     uTrans: { value: obj.trans },
     uTexture0: { value: textureArr[0] },
     uTexture1: { value: textureArr[1] },
@@ -84,7 +87,12 @@ function start () {
 }
 
 function loop () {
+  timer = timer + 0.01;
+
+  console.log(Math.sin(timer));
+
   mat.uniforms.uTrans.value = obj.trans;
+  mat.uniforms.uTime.value = timer;
   mat.uniforms.uResolution.value = new THREE.Vector2(
     window.innerWidth,
     window.innerHeight
@@ -106,10 +114,10 @@ window.addEventListener('resize', function () {
 
 canvas.addEventListener('mouseenter', function () {
   TweenMax.killTweensOf(obj);
-  TweenMax.to(obj, 1.5, { trans: 1 });
+  TweenMax.to(obj, 0.8, { trans: 1 });
 });
 
 canvas.addEventListener('mouseleave', function () {
   TweenMax.killTweensOf(obj);
-  TweenMax.to(obj, 1, { trans: 0 });
+  TweenMax.to(obj, 0.5, { trans: 0 });
 });
