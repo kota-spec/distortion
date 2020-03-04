@@ -11,3 +11,25 @@ a {
   font-size: 14px;
   margin-right: 20px;
 }
+
+.texts {
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+.text {
+  font-size: 5rem;
+  color: #fff;
+  margin: 0 0 150px 0;
+  text-align: center;
+  line-height: 1;
+  cursor: pointer;
+
+  &:last-child {
+    margin: 0;
+  }
+}

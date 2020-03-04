@@ -12,12 +12,17 @@ import fragmentShader from './gl/fragmentShader.frag';
 let renderer = new THREE.WebGLRenderer();
 
 const id = document.getElementById('app').getAttribute('data-id');
+const $$texts = document.querySelectorAll('.js-text');
 
 // デモに使用する画像URL
 const assetUrls = [
-  '../image/image.jpg',
-  '../image/lady.jpg',
-  `../image/disp${id}.jpg`
+  './image/image.jpg',
+  './image/lady.jpg',
+  './image/ball.jpg',
+  './image/canyon.jpg',
+  `./image/disp1.jpg`,
+  `./image/disp2.jpg`,
+  `./image/disp3.jpg`
 ];
 
 let canvas = renderer.domElement;
@@ -70,7 +75,7 @@ let mat = new THREE.ShaderMaterial({
     uTexture1: { value: textureArr[1] },
     uResolution: { value: new THREE.Vector2(width, height) },
     uImageResolution: { value: new THREE.Vector2(1600, 1027) },
-    uDisp: { value: textureArr[2] }
+    uDisp: { value: textureArr[4] }
   },
   vertexShader,
   fragmentShader
@@ -110,12 +115,28 @@ window.addEventListener('resize', function () {
   resize();
 });
 
-canvas.addEventListener('mouseenter', function () {
-  TweenMax.killTweensOf(obj);
-  TweenMax.to(obj, 0.8, { trans: 1 });
-});
+$$texts.forEach((r, i) => {
+  r.addEventListener('mouseenter', function () {
+    if (i === 0) {
+      mat.uniforms.uTexture1.value = textureArr[1];
+      mat.uniforms.uDisp.value = textureArr[4];
+    }
 
-canvas.addEventListener('mouseleave', function () {
-  TweenMax.killTweensOf(obj);
-  TweenMax.to(obj, 0.5, { trans: 0 });
+    if (i === 1) {
+      mat.uniforms.uTexture1.value = textureArr[2];
+      mat.uniforms.uDisp.value = textureArr[5];
+    }
+
+    if (i === 2) {
+      mat.uniforms.uTexture1.value = textureArr[3];
+      mat.uniforms.uDisp.value = textureArr[6];
+    }
+    TweenMax.killTweensOf(obj);
+    TweenMax.to(obj, 0.8, { trans: 1 });
+  });
+
+  r.addEventListener('mouseleave', function () {
+    TweenMax.killTweensOf(obj);
+    TweenMax.to(obj, 0.5, { trans: 0 });
+  });
 });
